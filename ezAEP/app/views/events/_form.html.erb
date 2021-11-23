@@ -37,8 +37,22 @@
   </div>
 
   <div class="field">
+  
+    <% v = (0...8).map { ('a'..'z').to_a[rand(26)] }.join %>
     <%= form.label :event_code %>
-    <%= form.text_field :event_code %>
+    <%= form.text_field :event_code, value: v, :readonly=>true %>
+  </div>
+
+  <div class="field">
+    <%= form.radio_button :event_visible, false, autofocus: true %>
+    <%= form.label :event_visible, "Private" %><br />
+
+    <%= form.radio_button :event_visible, true %>
+    <%= form.label :event_visible, "Public" %><br />
+  </div>
+
+  <div class="field">
+    <%= form.number_field :user_id, id: :event_user_id, value: current_user.id, type: :hidden %>
   </div>
 
   <div class="actions">
