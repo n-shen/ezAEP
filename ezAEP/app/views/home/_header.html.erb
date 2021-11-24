@@ -15,7 +15,7 @@
         
         <% if current_user.admin %>
         <% else %>
-          <%= link_to "My Events", events_path, class: "nav-link active" %>
+          <%= link_to "My Events", myevents_path, class: "nav-link active" %>
         <% end %>
         <li class="nav-item">
             <%= link_to "Setting", edit_user_registration_path, class: "nav-link active" %>
