@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :prests
   resources :myevents
   resources :events
   devise_for :users, controllers: {

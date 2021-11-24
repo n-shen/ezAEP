@@ -1,0 +1,22 @@
+<p>
+  <strong>Prest name:</strong>
+  <%= @prest.prest_name %>
+</p>
+
+<p>
+  <strong>Prest evdue:</strong>
+  <%= @prest.prest_evdue %>
+</p>
+
+<p>
+  <strong>Prest desc:</strong>
+  <%= @prest.prest_desc %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @prest.event_id %>
+</p>
+
+<%= link_to 'Edit', edit_prest_path(@prest) %> |
+<%= link_to 'Back', prests_path %>

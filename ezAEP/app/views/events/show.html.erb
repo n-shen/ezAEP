@@ -44,6 +44,38 @@
 <%= link_to 'Back', events_path %>
 
 <br/><br/>
+<h2>Presentations List</h2>
+<table class="table"> 
+  <thead class="table-dark">
+    <tr>
+      <th>Presentation Name</th>
+      <th>Description</th>
+      <th>Evaluation Due</th>
+      <th>Event Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Prest.all.each do |prest| %>
+      <% if prest.event_id == @event.id %>
+      <tr>
+        <td><%= prest.prest_name %></td>
+        <td><%= prest.prest_desc %></td>
+        <td><%= prest.prest_evdue %></td>
+        <td><%= prest.event_id %></td>
+        <td><%= link_to 'Show', prest %></td>
+        <td><%= link_to 'Edit', edit_prest_path(prest) %></td>
+        <td><%= link_to 'Destroy', prest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<br/><br/>
 <h2>Enrolled People</h2>
 <table class="table">
   <thead class="table-dark">
