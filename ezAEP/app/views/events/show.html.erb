@@ -1,43 +1,44 @@
-<% if current_user.admin || (!current_user.admin && @event.event_visible) %>
 <p>
-  <strong>Event name:</strong>
-  <%= @event.event_name %>
+  <strong>Evt name:</strong>
+  <%= @event.evt_name %>
 </p>
 
 <p>
-  <strong>Event host:</strong>
-  <%= @event.event_host %>
+  <strong>Evt host:</strong>
+  <%= @event.evt_host %>
 </p>
 
 <p>
-  <strong>Event start date:</strong>
-  <%= @event.event_start_date %>
+  <strong>Evt sdate:</strong>
+  <%= @event.evt_sdate %>
 </p>
 
 <p>
-  <strong>Event end date:</strong>
-  <%= @event.event_end_date %>
+  <strong>Evt edate:</strong>
+  <%= @event.evt_edate %>
 </p>
 
 <p>
-  <strong>Event desc:</strong>
-  <%= @event.event_desc %>
+  <strong>Evt desc:</strong>
+  <%= @event.evt_desc %>
 </p>
 
 <p>
-  <strong>Event visible:</strong>
-  <%= @event.event_visible %>
+  <strong>Public:</strong>
+  <%= @event.evt_public %>
 </p>
 
 <p>
-  <strong>Event code:</strong>
-  <%= @event.event_code %>
+  <strong>Creator:</strong>
+  <% @creator = User.find(@event.user_id) %>
+  <%= @creator.first_name %>
+  <%= @creator.last_name %>
 </p>
 
+<p>
+  <strong>Evt code:</strong>
+  <%= @event.evt_code %>
+</p>
 
-<%= link_to 'Edit', edit_event_path(@event), class:"btn btn-secondary" %>
-<%= link_to 'Back', events_path, class:"btn btn-secondary" %>
-
-<% else %>
-  <p><%= "You are not allowed to view this private event!" %></p>
-<% end %>
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

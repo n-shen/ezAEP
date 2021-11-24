@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
-  before_action :correct_user, only: %i[ edit update destroy ]
+  before_action :authenticate_user!, except: %i[]
+  before_action :correct_host, only: %i[ show edit update destroy ]
 
   # GET /events or /events.json
   def index
@@ -13,7 +14,6 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    # @event = Event.new
     @event = current_user.events.build
   end
 
@@ -59,9 +59,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def correct_user
+  def correct_host
     @event = current_user.events.find_by(id: params[:id])
-    redirect_to events_path, notice: 'Not Authorized!' if @event.nil?
+    redirect_to events_path, notice: "Not Authorized" if @event.nil?
   end
 
   private
@@ -72,6 +72,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:event_name, :event_host, :event_start_date, :event_end_date, :event_desc, :event_code, :event_visible, :user_id)
+      params.require(:event).permit(:evt_name, :evt_host, :evt_sdate, :evt_edate, :evt_desc, :evt_public, :evt_code, :user_id)
     end
 end
