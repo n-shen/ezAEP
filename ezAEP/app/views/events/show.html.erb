@@ -42,3 +42,28 @@
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+
+<br/><br/>
+<h2>Enrolled People</h2>
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th>Participant ID</th>
+      <th>Participant Name</th>
+      <th>Joining Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Myevent.all.each do |myevent| %>
+      <% if current_user == @event.user && myevent.event_id == @event.id %>
+        <tr>
+          <td><%= myevent.user_id %></td>
+          <% @person = User.find(myevent.user_id) %>
+          <td><%= @person.first_name %> <%= @person.last_name %></td>
+          <td><%= myevent.created_at %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
