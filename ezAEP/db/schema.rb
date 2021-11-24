@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_035600) do
+ActiveRecord::Schema.define(version: 2021_11_24_080759) do
+
+  create_table "events", force: :cascade do |t|
+    t.string "evt_name", default: "Default Event", null: false
+    t.string "evt_host", default: "Default Host", null: false
+    t.date "evt_sdate", null: false
+    t.date "evt_edate", null: false
+    t.text "evt_desc", default: "No description", null: false
+    t.boolean "evt_public", default: false, null: false
+    t.string "evt_code", null: false
+    t.integer "user_id", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["evt_code"], name: "index_events_on_evt_code", unique: true
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false

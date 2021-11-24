@@ -1,0 +1,44 @@
+<p>
+  <strong>Evt name:</strong>
+  <%= @event.evt_name %>
+</p>
+
+<p>
+  <strong>Evt host:</strong>
+  <%= @event.evt_host %>
+</p>
+
+<p>
+  <strong>Evt sdate:</strong>
+  <%= @event.evt_sdate %>
+</p>
+
+<p>
+  <strong>Evt edate:</strong>
+  <%= @event.evt_edate %>
+</p>
+
+<p>
+  <strong>Evt desc:</strong>
+  <%= @event.evt_desc %>
+</p>
+
+<p>
+  <strong>Public:</strong>
+  <%= @event.evt_public %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <% @creator = User.find(@event.user_id) %>
+  <%= @creator.first_name %>
+  <%= @creator.last_name %>
+</p>
+
+<p>
+  <strong>Evt code:</strong>
+  <%= @event.evt_code %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

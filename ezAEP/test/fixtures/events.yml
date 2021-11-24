@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  evt_name: MyString
+  evt_host: MyString
+  evt_sdate: 2021-11-24
+  evt_edate: 2021-11-24
+  evt_desc: MyText
+  evt_code: MyString
+
+two:
+  evt_name: MyString
+  evt_host: MyString
+  evt_sdate: 2021-11-24
+  evt_edate: 2021-11-24
+  evt_desc: MyText
+  evt_code: MyString
