@@ -1,2 +1,0 @@
-      invoke  active_record
-   identical    db/migrate/20211123042452_add_index.rb
