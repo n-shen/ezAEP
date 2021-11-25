@@ -28,7 +28,11 @@
 
   <div class="field">
     <%= form.label "Choose your event" %>
-    <%= form.select(:event_id, options_for_select(Event.all.collect {|e| [ e.evt_name, e.id.to_i ] })) %>
+    <%= form.select(:event_id, options_for_select(Event.where(user_id: current_user.id).collect {|e| [ e.evt_name, e.id.to_i ] })) %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :user_id, id: :prest_user_id, value: current_user.id, :hidden=>true %>
   </div>
 
   <div class="actions">

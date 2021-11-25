@@ -62,9 +62,11 @@ ActiveRecord::Schema.define(version: 2021_11_25_005255) do
     t.date "prest_evdue"
     t.text "prest_desc"
     t.integer "event_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_prests_on_event_id"
+    t.index ["user_id"], name: "index_prests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -90,4 +92,5 @@ ActiveRecord::Schema.define(version: 2021_11_25_005255) do
   add_foreign_key "pgrades", "prests"
   add_foreign_key "pgrades", "users"
   add_foreign_key "prests", "events"
+  add_foreign_key "prests", "users"
 end

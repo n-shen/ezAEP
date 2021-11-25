@@ -64,6 +64,6 @@ class PrestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def prest_params
-      params.require(:prest).permit(:prest_name, :prest_evdue, :prest_desc, :event_id)
+      params.require(:prest).permit(:prest_name, :prest_evdue, :prest_desc, :event_id, :user_id)
     end
 end

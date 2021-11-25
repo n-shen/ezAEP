@@ -1,11 +1,12 @@
 <h1>Presentations</h1>
+
 <table class="table"> 
   <thead>
     <tr>
       <th>Presentation Name</th>
-      <th>Description</th>
       <th>Evaluation Due</th>
       <th>Event Name</th>
+      <th>Creator</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,12 +14,15 @@
   <tbody>
     <% @prests.each do |prest| %>
 
-      <% if current_user.admin %>
+      <% if current_user.admin && prest.user_id == current_user.id %>
       <tr>
         <td><%= prest.prest_name %></td>
-        <td><%= prest.prest_desc %></td>
         <td><%= prest.prest_evdue %></td>
         <td><%= Event.all.find(prest.event_id).evt_name %></td>
+        <td>
+          <%= User.all.find(prest.user_id).first_name %>
+          <%= User.all.find(prest.user_id).last_name %>
+        </td>
         <td><%= link_to 'Show', prest %></td>
         <td><%= link_to 'Edit', edit_prest_path(prest) %></td>
         <td><%= link_to 'Destroy', prest, method: :delete, data: { confirm: 'Are you sure?' } %></td>

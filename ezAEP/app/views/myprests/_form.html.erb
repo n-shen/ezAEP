@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.label "Presentor:" %>
+    <%= form.select(:user_id, options_for_select(User.all.collect {|u| [ u.first_name, u.id ] })) %>
   </div>
 
   <div class="field">
-    <%= form.label :prest_id %>
-    <%= form.text_field :prest_id %>
+    <%= form.label "To Presentation:" %>
+    <%= form.select(:prest_id, options_for_select(Prest.where(user_id: current_user.id).collect {|p| [ p.prest_name, p.id ] })) %>
   </div>
 
   <div class="actions">

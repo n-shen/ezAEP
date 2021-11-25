@@ -1,4 +1,8 @@
-<h1>Presentors</h1>
+<% if current_user.admin %>
+  <h1>ALL Presentors</h1>
+<% else %>
+  <h1>My Presentations </h1>
+<% end %>
 
 <table class="table">
   <thead>
@@ -13,6 +17,7 @@
 
   <tbody>
     <% @myprests.each do |myprest| %>
+    <% if !current_user.admin && current_user.id == myprest.user_id || current_user.admin %>
       <tr>
         <td><%= myprest.user_id %></td>
         <td>
@@ -25,6 +30,7 @@
         <td><%= link_to 'Change', edit_myprest_path(myprest) %></td>
         <td><%= link_to 'Delete', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
