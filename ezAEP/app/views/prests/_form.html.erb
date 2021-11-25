@@ -17,7 +17,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :prest_evdue %>
+    <%= form.label "Evaluation Due" %>
     <%= form.date_select :prest_evdue %>
   </div>
 
@@ -27,8 +27,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
+    <%= form.label "Choose your event" %>
+    <%= form.select(:event_id, options_for_select(Event.all.collect {|e| [ e.evt_name, e.id.to_i ] })) %>
   </div>
 
   <div class="actions">

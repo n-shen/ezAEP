@@ -1,5 +1,4 @@
 <h1>Presentations</h1>
-
 <table class="table"> 
   <thead>
     <tr>
@@ -13,15 +12,18 @@
 
   <tbody>
     <% @prests.each do |prest| %>
+
+      <% if current_user.admin %>
       <tr>
         <td><%= prest.prest_name %></td>
         <td><%= prest.prest_desc %></td>
         <td><%= prest.prest_evdue %></td>
-        <td><%= prest.event_id %></td>
+        <td><%= Event.all.find(prest.event_id).evt_name %></td>
         <td><%= link_to 'Show', prest %></td>
         <td><%= link_to 'Edit', edit_prest_path(prest) %></td>
         <td><%= link_to 'Destroy', prest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
