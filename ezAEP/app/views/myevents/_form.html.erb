@@ -12,17 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :myevent_user_id, value: current_user.id, :readonly=>true %>
+    <%= form.number_field :user_id, id: :myevent_user_id, value: current_user.id, :hidden=>true %>
   </div>
 
   <div class="field">
-    <%= form.label :event_id %>
+    <%= form.label "Event id provided by your host:" %>
     <%= form.text_field :event_id %>
   </div>
 
   <div class="field">
-    <%= form.label :myevent_code %>
+    <%= form.label "Event Access Code:" %>
     <%= form.text_field :myevent_code %>
   </div>
 

@@ -1,26 +1,32 @@
 <p>
-  <strong>Prest ID:</strong>
+  <strong>Presentation ID:</strong>
   <%= @prest.id %>
 </p>
 
 <p>
-  <strong>Prest name:</strong>
+  <strong>Name:</strong>
   <%= @prest.prest_name %>
 </p>
 
 <p>
-  <strong>Prest evdue:</strong>
+  <strong>Evaluation Due:</strong>
   <%= @prest.prest_evdue %>
 </p>
 
 <p>
-  <strong>Prest desc:</strong>
+  <strong>Details:</strong>
   <%= @prest.prest_desc %>
 </p>
 
 <p>
-  <strong>Event:</strong>
-  <%= @prest.event_id %>
+  <strong>Event Name:</strong>
+  <%= Event.all.find(@prest.event_id).evt_name %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+    <%= User.all.find(@prest.user_id).first_name %>
+    <%= User.all.find(@prest.user_id).last_name %>
 </p>
 
 <%= link_to 'Edit', edit_prest_path(@prest) %> |

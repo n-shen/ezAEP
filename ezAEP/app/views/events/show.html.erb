@@ -1,51 +1,33 @@
-<p>
-  <strong>Evt name:</strong>
-  <%= @event.evt_name %>
-</p>
-
-<p>
-  <strong>Evt host:</strong>
-  <%= @event.evt_host %>
-</p>
-
-<p>
-  <strong>Evt sdate:</strong>
-  <%= @event.evt_sdate %>
-</p>
-
-<p>
-  <strong>Evt edate:</strong>
-  <%= @event.evt_edate %>
-</p>
-
-<p>
-  <strong>Evt desc:</strong>
+<div class="jumbotron">
+  <h1 class="display-4"><%= @event.evt_name %></h1>
+  <p class="lead">
+    <% if @event.evt_public %>
+      <strong>Public Event</strong>
+    <% else %>
+      <strong>Private Event</strong>
+    <% end %>  |
+    <strong>Host:</strong> <%= @event.evt_host %> | 
+    <strong>Start date:</strong> <%= @event.evt_sdate %> | 
+    <strong>End date:</strong> <%= @event.evt_edate %> |
+    <strong>Creator:</strong>
+    <% @creator = User.find(@event.user_id) %>
+    <%= @creator.first_name %>
+    <%= @creator.last_name %> |
+    <strong>Code:</strong>
+    <%= @event.evt_code %>
+  </p>
+  <hr class="my-4">
   <%= @event.evt_desc %>
-</p>
+</div>
 
-<p>
-  <strong>Public:</strong>
-  <%= @event.evt_public %>
-</p>
+<br/>
 
-<p>
-  <strong>Creator:</strong>
-  <% @creator = User.find(@event.user_id) %>
-  <%= @creator.first_name %>
-  <%= @creator.last_name %>
-</p>
-
-<p>
-  <strong>Evt code:</strong>
-  <%= @event.evt_code %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-secondary" %> 
+<%= link_to 'Back', events_path, class: "btn btn-secondary" %>
 
 <br/><br/>
 <h2>Presentations List</h2>
-<table class="table"> 
+<table class="table table-striped"> 
   <thead class="table-dark">
     <tr>
       <th>Presentation Name</th>
@@ -77,8 +59,8 @@
 
 <br/><br/>
 <h2>Enrolled People</h2>
-<table class="table">
-  <thead class="table-dark">
+<table class="table table-success table-striped table-sm">
+  <thead>
     <tr>
       <th>Participant ID</th>
       <th>Participant Name</th>

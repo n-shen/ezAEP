@@ -5,6 +5,7 @@ class CreatePrests < ActiveRecord::Migration[6.0]
       t.date :prest_evdue
       t.text :prest_desc
       t.references :event, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
