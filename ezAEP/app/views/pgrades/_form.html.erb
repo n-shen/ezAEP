@@ -1,0 +1,37 @@
+<%= form_with(model: pgrade, local: true) do |form| %>
+  <% if pgrade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pgrade.errors.count, "error") %> prohibited this pgrade from being saved:</h2>
+
+      <ul>
+        <% pgrade.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prest_id %>
+    <%= form.text_field :prest_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pd_socre %>
+    <%= form.number_field :pd_socre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pd_review %>
+    <%= form.text_area :pd_review %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

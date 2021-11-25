@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pgrades
+  resources :myprests
   resources :prests
   resources :myevents
   resources :events

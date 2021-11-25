@@ -1,0 +1,34 @@
+<h1>Presentors</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Presentor Name</th>
+      <th>Prestation ID</th>
+      <th>Prestation Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @myprests.each do |myprest| %>
+      <tr>
+        <td><%= myprest.user_id %></td>
+        <td>
+          <%= User.all.find(myprest.user_id).first_name %>
+          <%= User.all.find(myprest.user_id).last_name %>
+        </td>
+        <td><%= myprest.prest_id %></td>
+        <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
+        <td><%= link_to 'Show', myprest %></td>
+        <td><%= link_to 'Change', edit_myprest_path(myprest) %></td>
+        <td><%= link_to 'Delete', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Presentor', new_myprest_path %>

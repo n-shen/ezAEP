@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_224452) do
+ActiveRecord::Schema.define(version: 2021_11_25_005255) do
 
   create_table "events", force: :cascade do |t|
     t.string "evt_name", default: "Default Event", null: false
@@ -35,6 +35,26 @@ ActiveRecord::Schema.define(version: 2021_11_24_224452) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_myevents_on_event_id"
     t.index ["user_id"], name: "index_myevents_on_user_id"
+  end
+
+  create_table "myprests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "prest_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prest_id"], name: "index_myprests_on_prest_id"
+    t.index ["user_id"], name: "index_myprests_on_user_id"
+  end
+
+  create_table "pgrades", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "prest_id", null: false
+    t.integer "pd_socre"
+    t.text "pd_review"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prest_id"], name: "index_pgrades_on_prest_id"
+    t.index ["user_id"], name: "index_pgrades_on_user_id"
   end
 
   create_table "prests", force: :cascade do |t|
@@ -65,5 +85,9 @@ ActiveRecord::Schema.define(version: 2021_11_24_224452) do
   add_foreign_key "events", "users"
   add_foreign_key "myevents", "events"
   add_foreign_key "myevents", "users"
+  add_foreign_key "myprests", "prests"
+  add_foreign_key "myprests", "users"
+  add_foreign_key "pgrades", "prests"
+  add_foreign_key "pgrades", "users"
   add_foreign_key "prests", "events"
 end

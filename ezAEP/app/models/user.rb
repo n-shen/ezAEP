@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :events
   has_many :myevents
   has_many :events, through: :myevents
+  has_many :prests, through: :myprests
+  has_many :prests, through: :pgrades
 end
