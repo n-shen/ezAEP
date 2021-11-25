@@ -8,12 +8,11 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.text :evt_desc,           null: false, default: "No description"
       t.boolean :evt_public,      null: false, default: false
       t.string :evt_code,         null: false
-      t.integer :user_id,         null: false, default: 0
+      t.references :user,         null: false, foreign_key: true
 
       t.timestamps
     end
 
-    add_index :events, :evt_code,                unique: true
-    add_index :events, :user_id
+    add_index :events, :evt_code, unique: true
   end
 end

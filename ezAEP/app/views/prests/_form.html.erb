@@ -1,0 +1,37 @@
+<%= form_with(model: prest, local: true) do |form| %>
+  <% if prest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(prest.errors.count, "error") %> prohibited this prest from being saved:</h2>
+
+      <ul>
+        <% prest.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :prest_name %>
+    <%= form.text_field :prest_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prest_evdue %>
+    <%= form.date_select :prest_evdue %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prest_desc %>
+    <%= form.text_area :prest_desc %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_id %>
+    <%= form.text_field :event_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

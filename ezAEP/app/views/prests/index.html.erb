@@ -1,24 +1,7 @@
-<p>
-  <strong>User:</strong>
-  <%= @myevent.user_id %>
-</p>
+<h1>Presentations</h1>
 
-<p>
-  <strong>Event:</strong>
-  <%= @myevent.event_id %>
-</p>
-
-<p>
-  <strong>Myevent code:</strong>
-  <%= @myevent.myevent_code %>
-</p>
-
-<%= link_to 'Back', myevents_path %>
-
-<br/><br/>
-<h2>Presentations in CUrrent Event</h2>
 <table class="table"> 
-  <thead class="table-dark">
+  <thead>
     <tr>
       <th>Presentation Name</th>
       <th>Description</th>
@@ -29,17 +12,20 @@
   </thead>
 
   <tbody>
-    <% Prest.all.each do |prest| %>
-      <% if prest.event_id == @myevent.event_id %>
+    <% @prests.each do |prest| %>
       <tr>
         <td><%= prest.prest_name %></td>
         <td><%= prest.prest_desc %></td>
         <td><%= prest.prest_evdue %></td>
         <td><%= prest.event_id %></td>
         <td><%= link_to 'Show', prest %></td>
+        <td><%= link_to 'Edit', edit_prest_path(prest) %></td>
+        <td><%= link_to 'Destroy', prest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>
 
+<br>
+
+<%= link_to 'New Prest', new_prest_path %>

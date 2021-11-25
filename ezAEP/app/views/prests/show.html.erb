@@ -1,0 +1,86 @@
+<p>
+  <strong>Prest ID:</strong>
+  <%= @prest.id %>
+</p>
+
+<p>
+  <strong>Prest name:</strong>
+  <%= @prest.prest_name %>
+</p>
+
+<p>
+  <strong>Prest evdue:</strong>
+  <%= @prest.prest_evdue %>
+</p>
+
+<p>
+  <strong>Prest desc:</strong>
+  <%= @prest.prest_desc %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @prest.event_id %>
+</p>
+
+<%= link_to 'Edit', edit_prest_path(@prest) %> |
+<%= link_to 'Back', prests_path %>
+
+<br/><br/>
+<h2>Presentors</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Presentor Name</th>
+      <th>Prestation ID</th>
+      <th>Prestation Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Myprest.all.each do |myprest| %>
+      <tr>
+        <td><%= myprest.user_id %></td>
+        <td>
+          <%= User.all.find(myprest.user_id).first_name %>
+          <%= User.all.find(myprest.user_id).last_name %>
+        </td>
+        <td><%= myprest.prest_id %></td>
+        <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
+        <td><%= link_to 'Remove', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br/><br/>
+<h2>Reviews</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Prest</th>
+      <th>Pd socre</th>
+      <th>Pd review</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Pgrade.all.each do |pgrade| %>
+      <tr>
+        <td><%= pgrade.user_id %></td>
+        <td><%= pgrade.prest_id %></td>
+        <td><%= pgrade.pd_socre %></td>
+        <td><%= pgrade.pd_review %></td>
+        <td><%= link_to 'Show', pgrade %></td>
+        <td><%= link_to 'Edit', edit_pgrade_path(pgrade) %></td>
+        <td><%= link_to 'Destroy', pgrade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

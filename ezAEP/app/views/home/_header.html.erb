@@ -14,8 +14,12 @@
         <%= link_to "Events", events_path, class: "nav-link active" %>
         
         <% if current_user.admin %>
+          <%= link_to "Presentations", prests_path, class: "nav-link active" %>
+          <%= link_to "Presentos", myprests_path, class: "nav-link active" %>
+          <%= link_to "PGrades", pgrades_path, class: "nav-link active" %>
         <% else %>
           <%= link_to "My Events", myevents_path, class: "nav-link active" %>
+          <%= link_to "My Presentations", myprests_path, class: "nav-link active" %>
         <% end %>
         <li class="nav-item">
             <%= link_to "Setting", edit_user_registration_path, class: "nav-link active" %>

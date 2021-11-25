@@ -26,7 +26,6 @@
         <td><%= Event.all.find(myevent.event_id).evt_edate %></td>
         <td><%= myevent.myevent_code %></td>
         <td><%= link_to 'Show', myevent %></td>
-        <td><%= link_to 'Edit', edit_myevent_path(myevent) %></td>
         <td><%= link_to 'Destroy', myevent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @pgrade.user_id %>
+</p>
+
+<p>
+  <strong>Prest:</strong>
+  <%= @pgrade.prest_id %>
+</p>
+
+<p>
+  <strong>Pd socre:</strong>
+  <%= @pgrade.pd_socre %>
+</p>
+
+<p>
+  <strong>Pd review:</strong>
+  <%= @pgrade.pd_review %>
+</p>
+
+<%= link_to 'Edit', edit_pgrade_path(@pgrade) %> |
+<%= link_to 'Back', pgrades_path %>
