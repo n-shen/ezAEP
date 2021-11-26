@@ -26,6 +26,7 @@
 <%= link_to 'Back', events_path, class: "btn btn-dark" %>
 
 <br/><br/>
+<hr>
 <h2>Presentations List</h2>
 <table class="table table-striped"> 
   <thead class="table-dark">
@@ -54,10 +55,12 @@
     <% end %>
   </tbody>
 </table>
-
+<br/>
+<%= link_to 'New Presentation', new_prest_path, class:"btn btn-success" %>
 
 
 <br/><br/>
+<hr>
 <h2>Enrolled People</h2>
 <table class="table table-success table-striped table-sm">
   <thead>
@@ -65,6 +68,7 @@
       <th>Participant ID</th>
       <th>Participant Name</th>
       <th>Joining Date</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -76,8 +80,10 @@
           <% @person = User.find(myevent.user_id) %>
           <td><%= @person.first_name %> <%= @person.last_name %></td>
           <td><%= myevent.created_at %></td>
+          <td><%= button_to 'Remove', myevent, method: :delete, data: { confirm: 'Remove the person from current event?' } %></td>
         </tr>
       <% end %>
     <% end %>
   </tbody>
 </table>
+<br/>

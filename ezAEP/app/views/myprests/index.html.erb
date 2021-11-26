@@ -27,8 +27,10 @@
         <td><%= myprest.prest_id %></td>
         <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
         <td><%= link_to 'Show', myprest %></td>
-        <td><%= link_to 'Change', edit_myprest_path(myprest) %></td>
-        <td><%= link_to 'Delete', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.admin %>
+          <td><%= link_to 'Change', edit_myprest_path(myprest) %></td>
+          <td><%= link_to 'Delete', myprest, method: :delete, data: { confirm: 'Remove the presentor from current presentation?' } %></td>
+        <% end %>
       </tr>
       <% end %>
     <% end %>
@@ -37,4 +39,6 @@
 
 <br>
 
-<%= link_to 'New Presentor', new_myprest_path %>
+<% if current_user.admin %>
+  <%= link_to 'New Presentor', new_myprest_path %>
+<% end %>  
