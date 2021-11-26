@@ -19,9 +19,11 @@
     <%= render 'home/header' %>
     <br>
     <div class="container" >
-      <% if notice || alert %>
+      <% if alert %>
         <%= render 'layouts/alerts' %>
-      <% end %> 
+      <% elsif notice %>
+        <%= render 'layouts/notice' %>
+      <% end %>  
       <%= yield %>
     </div>
 

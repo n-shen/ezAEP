@@ -21,16 +21,20 @@ class MyeventsController < ApplicationController
 
   # POST /myevents or /myevents.json
   def create
-    @myevent = Myevent.new(myevent_params)
-
-    respond_to do |format|
-      if @myevent.save
-        format.html { redirect_to @myevent, notice: "Myevent was successfully created." }
-        format.json { render :show, status: :created, location: @myevent }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @myevent.errors, status: :unprocessable_entity }
+    event = Event.find_by(id: myevent_params[:event_id])
+    if event.present? && myevent_params[:myevent_code] == event.evt_code
+      @myevent = Myevent.new(myevent_params)
+      respond_to do |format|
+        if @myevent.save
+          format.html { redirect_to @myevent, notice: "Event attended!" }
+          format.json { render :show, status: :created, location: @myevent }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @myevent.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to new_myevent_path, alert: 'The event does NOT exist or your AccessCode is wrong! Please contact your event host. '
     end
   end
 
