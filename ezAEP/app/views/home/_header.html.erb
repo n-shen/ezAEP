@@ -15,7 +15,7 @@
         
         <% if current_user.admin %>
           <%= link_to "Presentations", prests_path, class: "nav-link active" %>
-          <%= link_to "Presentors", myprests_path, class: "nav-link active" %>
+          <%= link_to "Speakers", myprests_path, class: "nav-link active" %>
           <%= link_to "PGrades", pgrades_path, class: "nav-link active" %>
         <% else %>
           <%= link_to "My Events", myevents_path, class: "nav-link active" %>

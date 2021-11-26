@@ -1,16 +1,18 @@
 <% if current_user.admin %>
-  <h1>ALL Presentors</h1>
+  <h1>ALL Speakers</h1>
 <% else %>
   <h1>My Presentations </h1>
 <% end %>
 
-<table class="table">
-  <thead>
+<table class="table table-striped table-sm">
+  <thead class="table-secondary">
     <tr>
-      <th>User ID</th>
-      <th>Presentor Name</th>
-      <th>Prestation ID</th>
-      <th>Prestation Name</th>
+      <th>Speaker ID</th>
+      <th>Speaker Name</th>
+      <th>Contact Email</th>
+      <th>Presentation ID</th>
+      <th>Presentation Name</th>
+      <th>Event</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,8 +28,11 @@
           <%= User.all.find(myprest.user_id).first_name %>
           <%= User.all.find(myprest.user_id).last_name %>
         </td>
+        <td><%= User.all.find(myprest.user_id).email %></td>
         <td><%= myprest.prest_id %></td>
-        <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
+        <% p = Prest.all.find(myprest.prest_id) %>
+        <td><%= p.prest_name %></td>
+        <td><%= Event.all.find(p.event_id).evt_name %></td>
         <td><%= link_to 'Show', myprest %></td>
         <% if current_user.admin %>
           <td><%= link_to 'Change', edit_myprest_path(myprest) %></td>
@@ -42,5 +47,5 @@
 <br>
 
 <% if current_user.admin %>
-  <%= link_to 'New Presentor', new_myprest_path, class:"btn btn-info" %>
+  <%= link_to 'New Speaker', new_myprest_path, class:"btn btn-info" %>
 <% end %>  

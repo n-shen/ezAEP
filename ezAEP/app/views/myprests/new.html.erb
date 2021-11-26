@@ -1,5 +1,7 @@
-<h1>Add Presentor</h1>
-
-<%= render 'form', myprest: @myprest %>
+<h1>Add a Speaker</h1>
 <br/>
+<%= render 'form', myprest: @myprest %>
+<% 3.times do %>
+    <br/>
+<% end %>
 <%= link_to 'Back', myprests_path, class:"btn btn-dark" %>

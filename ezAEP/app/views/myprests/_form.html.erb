@@ -13,7 +13,7 @@
 
 
   <div class="mb-3">
-    <%= form.label "Presentor:" %>
+    <%= form.label "Select a speaker:" %>
     
     <% euser = []%>
     <% Myevent.where(event_id: (Event.where(user_id: current_user.id).ids)).each do |e| %>
@@ -27,7 +27,7 @@
     <%= form.label "To Presentation:" %>
     <%= form.select(:prest_id, options_for_select(Prest.where(user_id: current_user.id).collect {|p| [ p.prest_name.concat(" << ").concat(Event.find(p.event_id).evt_name), p.id ] })) %>
   </div>
-
+  
   <div class="actions">
     <%= form.submit %>
   </div>

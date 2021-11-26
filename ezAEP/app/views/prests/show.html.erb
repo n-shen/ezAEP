@@ -17,16 +17,20 @@
 <%= link_to 'Edit', edit_prest_path(@prest), class: "btn btn-dark" %> 
 <%= link_to 'Back', prests_path, class: "btn btn-dark" %>
 
-<br/><br/>
-<h2>Presentors</h2>
 
-<table class="table">
-  <thead>
+<br/><br/>
+<hr>
+<h2>Speakers</h2>
+
+<table class="table table-striped">
+  <thead class="table-secondary">
     <tr>
-      <th>User ID</th>
-      <th>Presentor Name</th>
-      <th>Prestation ID</th>
-      <th>Prestation Name</th>
+      <th>Speaker ID</th>
+      <th>Speaker Name</th>
+      <th>Contact Email</th>
+      <th>Presentation ID</th>
+      <th>Presentation Name</th>
+      <th>Event</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -42,8 +46,11 @@
             <%= User.all.find(myprest.user_id).first_name %>
             <%= User.all.find(myprest.user_id).last_name %>
           </td>
+          <td><%= User.all.find(myprest.user_id).email %></td>
           <td><%= myprest.prest_id %></td>
-          <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
+          <% p = Prest.all.find(myprest.prest_id) %>
+          <td><%= p.prest_name %></td>
+          <td><%= Event.all.find(p.event_id).evt_name %></td>
           <td><%= link_to 'Remove', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
@@ -54,6 +61,7 @@
 <%= link_to 'New Presentor', new_myprest_path, class:"btn btn-info" %>
 
 <br/><br/>
+<hr/>
 <h2>Reviews</h2>
 
 <table class="table">

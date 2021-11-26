@@ -51,7 +51,7 @@ class MyprestsController < ApplicationController
   def destroy
     @myprest.destroy
     respond_to do |format|
-      format.html { redirect_to myprests_url, notice: "Myprest was successfully destroyed." }
+      format.html { redirect_to myprests_url, notice: "The speaker has been removed from the presentation!" }
       format.json { head :no_content }
     end
   end
