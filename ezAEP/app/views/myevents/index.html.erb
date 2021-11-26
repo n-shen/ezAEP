@@ -25,8 +25,8 @@
         <td><%= Event.all.find(myevent.event_id).evt_sdate %></td>
         <td><%= Event.all.find(myevent.event_id).evt_edate %></td>
         <td><%= myevent.myevent_code %></td>
-        <td><%= link_to 'Show', myevent %></td>
-        <td><%= link_to 'Destroy', myevent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', Event.all.find(myevent.event_id) %></td>
+        <td><%= link_to 'Unenroll', myevent, method: :delete, data: { confirm: 'Unenroll this event?' } %></td>
       </tr>
     <% end %>
     <% end %>
@@ -35,5 +35,5 @@
 
 <br>
 
-<%= link_to 'Add Event', new_myevent_path, class: "btn btn-primary" %>
+<%= link_to 'Enroll a Private Event', new_myevent_path, class: "btn btn-primary" %>
 

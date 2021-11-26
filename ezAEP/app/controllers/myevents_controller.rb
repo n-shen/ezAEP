@@ -30,7 +30,7 @@ class MyeventsController < ApplicationController
         @myevent = Myevent.new(myevent_params)
         respond_to do |format|
           if @myevent.save
-            format.html { redirect_to @myevent, notice: 'You enrolled this event successfully!' }
+            format.html { redirect_to event, notice: 'You enrolled this event successfully!' }
             format.json { render :show, status: :created, location: @myevent }
           else
             format.html { render :new, status: :unprocessable_entity }

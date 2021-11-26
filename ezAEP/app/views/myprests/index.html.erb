@@ -13,7 +13,9 @@
       <th>Presentation ID</th>
       <th>Presentation Name</th>
       <th>Event</th>
-      <th colspan="3"></th>
+      <% if current_user.admin %>
+        <th colspan="2"></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -31,9 +33,9 @@
         <td><%= User.all.find(myprest.user_id).email %></td>
         <td><%= myprest.prest_id %></td>
         <% p = Prest.all.find(myprest.prest_id) %>
-        <td><%= p.prest_name %></td>
-        <td><%= Event.all.find(p.event_id).evt_name %></td>
-        <td><%= link_to 'Show', myprest %></td>
+        <td><%= link_to p.prest_name, Prest.all.find(myprest.prest_id) %></td>
+        <% e = Event.all.find(p.event_id) %>
+        <td><%= link_to e.evt_name, e %></td>
         <% if current_user.admin %>
           <td><%= link_to 'Change', edit_myprest_path(myprest) %></td>
           <td><%= link_to 'Delete', myprest, method: :delete, data: { confirm: 'Remove the presentor from current presentation?' } %></td>

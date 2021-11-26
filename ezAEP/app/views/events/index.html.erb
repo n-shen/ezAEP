@@ -31,7 +31,7 @@
         <td><%= @creator.first_name %> <%= @creator.last_name %></td>
         <td><%= event.evt_code %></td>
         <% if current_user.admin %>
-        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Delete current event? ' } %></td>
         <% end %>
       </tr>
     <% end %>

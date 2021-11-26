@@ -11,31 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :prest_name %>
-    <%= form.text_field :prest_name %>
+  <div class="input-group mb-3">
+    <%= form.label "Title", class:"input-group-text" %>
+    <%= form.text_field :prest_name, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label "Evaluation Due" %>
     <%= form.date_select :prest_evdue %>
   </div>
 
-  <div class="field">
-    <%= form.label :prest_desc %>
-    <%= form.text_area :prest_desc %>
+  <div class="input-group mb-3">
+    <%= form.label "Description", class:"input-group-text" %>
+    <%= form.text_area :prest_desc, class:"form-control", rows: 5 %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label "Choose your event" %>
     <%= form.select(:event_id, options_for_select(Event.where(user_id: current_user.id).collect {|e| [ e.evt_name, e.id.to_i ] })) %>
   </div>
 
-  <div class="field">
+  <div>
     <%= form.number_field :user_id, id: :prest_user_id, value: current_user.id, :hidden=>true %>
   </div>
 
+  <br/>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-primary", value: btn_name %>
   </div>
 <% end %>

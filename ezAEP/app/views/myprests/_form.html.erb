@@ -13,7 +13,7 @@
 
 
   <div class="mb-3">
-    <%= form.label "Select a speaker:" %>
+    <%= form.label "Select a speaker:", class:"form-label" %>
     
     <% euser = []%>
     <% Myevent.where(event_id: (Event.where(user_id: current_user.id).ids)).each do |e| %>
@@ -29,6 +29,6 @@
   </div>
   
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-info", value: btn_name %>
   </div>
 <% end %>
