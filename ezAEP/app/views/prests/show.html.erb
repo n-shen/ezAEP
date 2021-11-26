@@ -1,36 +1,21 @@
-<p>
-  <strong>Presentation ID:</strong>
-  <%= @prest.id %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @prest.prest_name %>
-</p>
-
-<p>
-  <strong>Evaluation Due:</strong>
-  <%= @prest.prest_evdue %>
-</p>
-
-<p>
-  <strong>Details:</strong>
-  <%= @prest.prest_desc %>
-</p>
-
-<p>
-  <strong>Event Name:</strong>
-  <%= Event.all.find(@prest.event_id).evt_name %>
-</p>
-
-<p>
-  <strong>Creator:</strong>
+<div class="jumbotron">
+  <h1 class="display-4"><%= @prest.prest_name %></h1>
+  <p class="lead">
+    <strong>Presentation</strong> |
+    <strong>ID:</strong> <%= @prest.id %> | 
+    <strong>Event:</strong>  <%= Event.all.find(@prest.event_id).evt_name %> |
+    <strong>Evaluation Due:</strong> <%= @prest.prest_evdue %>  |
+    <strong>Creator:</strong>    
     <%= User.all.find(@prest.user_id).first_name %>
     <%= User.all.find(@prest.user_id).last_name %>
-</p>
+  </p>
+  <hr class="my-4">
+  <p> <%= @prest.prest_desc %> </p>
+</div>
 
-<%= link_to 'Edit', edit_prest_path(@prest) %> |
-<%= link_to 'Back', prests_path %>
+<br/>
+<%= link_to 'Edit', edit_prest_path(@prest), class: "btn btn-dark" %> 
+<%= link_to 'Back', prests_path, class: "btn btn-dark" %>
 
 <br/><br/>
 <h2>Presentors</h2>
@@ -61,6 +46,8 @@
     <% end %>
   </tbody>
 </table>
+<br/>
+<%= link_to 'New Presentor', new_myprest_path, class:"btn btn-info" %>
 
 <br/><br/>
 <h2>Reviews</h2>

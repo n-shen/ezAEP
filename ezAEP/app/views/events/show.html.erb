@@ -43,13 +43,12 @@
     <% Prest.all.each do |prest| %>
       <% if prest.event_id == @event.id %>
       <tr>
-        <td><%= prest.prest_name %></td>
+        <td><%= link_to prest.prest_name, prest %></td>
         <td><%= prest.prest_desc %></td>
         <td><%= prest.prest_evdue %></td>
-        <td><%= prest.event_id %></td>
-        <td><%= link_to 'Show', prest %></td>
+        <td><%= Event.all.find(prest.event_id).evt_name %></td>
         <td><%= link_to 'Edit', edit_prest_path(prest) %></td>
-        <td><%= link_to 'Destroy', prest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', prest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
@@ -80,7 +79,7 @@
           <% @person = User.find(myevent.user_id) %>
           <td><%= @person.first_name %> <%= @person.last_name %></td>
           <td><%= myevent.created_at %></td>
-          <td><%= button_to 'Remove', myevent, method: :delete, data: { confirm: 'Remove the person from current event?' } %></td>
+          <td><%= link_to 'Remove', myevent, method: :delete, data: { confirm: 'Remove the person from current event?' } %></td>
         </tr>
       <% end %>
     <% end %>
