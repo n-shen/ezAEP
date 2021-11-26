@@ -11,50 +11,52 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :evt_name %>
-    <%= form.text_field :evt_name %>
+  <div class="input-group mb-3">
+    <%= form.label "Event Title", class:"input-group-text" %>
+    <%= form.text_field :evt_name, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :evt_host %>
-    <%= form.text_field :evt_host %>
+  <div class="input-group mb-3">
+    <%= form.label "Event Host", class:"input-group-text" %>
+    <%= form.text_field :evt_host, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :evt_sdate %>
+  <div class="mb-3">
+    <%= form.label "Start date", class:"form-label" %>
     <%= form.date_select :evt_sdate %>
   </div>
 
-  <div class="field">
-    <%= form.label :evt_edate %>
+  <div class="mb-3">
+    <%= form.label "End date", class:"form-label" %>
     <%= form.date_select :evt_edate %>
   </div>
 
-  <div class="field">
-    <%= form.label :evt_desc %>
-    <%= form.text_area :evt_desc %>
+  <div class="input-group">
+    <%= form.label "Description", class:"input-group-text" %>
+    <%= form.text_area :evt_desc, class:"form-control", rows: 5 %>
+  </div>
+  <div class="mb-3">
+
   </div>
 
-  <div class="field">
-    <%= form.radio_button :evt_public, false, autofocus: true %>
-    <%= form.label :event, "Private" %><br />
-
-    <%= form.radio_button :evt_public, true %>
-    <%= form.label :evt_public, "Public" %><br />
+  <div class="form-check">
+    <%= form.radio_button :evt_public, false, autofocus: true, class:"form-check-input" %>
+    <%= form.label :event, "Private Event (Join via Access code provided by you)", class:"form-check-label" %><br />
+    <%= form.radio_button :evt_public, true, class:"form-check-input" %>
+    <%= form.label :evt_public, "Public Event (Access code is visible by all publics)", class:"form-check-label" %><br />
   </div>
-
-  <div class="field">
+  
+  <div class="input-group mb-3">
     <% v = (0...8).map { ('a'..'z').to_a[rand(26)] }.join %>
-    <%= form.label :evt_code %>
-    <%= form.text_field :evt_code, value: v, :readonly=>true%>
+    <%= form.label "Access Code", class:"input-group-text" %>
+    <%= form.text_field :evt_code, value: v, :readonly=>true, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.number_field :user_id, id: :event_user_id, value: current_user.id, :hidden=>true %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-primary" %>
   </div>
 <% end %>

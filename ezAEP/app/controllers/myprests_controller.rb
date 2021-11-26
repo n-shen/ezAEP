@@ -25,7 +25,7 @@ class MyprestsController < ApplicationController
 
     respond_to do |format|
       if @myprest.save
-        format.html { redirect_to @myprest, notice: "Myprest was successfully created." }
+        format.html { redirect_to @myprest, notice: "Speaker and Presentation was linked successfully!" }
         format.json { render :show, status: :created, location: @myprest }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class MyprestsController < ApplicationController
   def update
     respond_to do |format|
       if @myprest.update(myprest_params)
-        format.html { redirect_to @myprest, notice: "Myprest was successfully updated." }
+        format.html { redirect_to @myprest, notice: "Relationship was successfully updated." }
         format.json { render :show, status: :ok, location: @myprest }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class MyprestsController < ApplicationController
   def destroy
     @myprest.destroy
     respond_to do |format|
-      format.html { redirect_to myprests_url, notice: "Myprest was successfully destroyed." }
+      format.html { redirect_to myprests_url, notice: "The speaker has been removed from the presentation!" }
       format.json { head :no_content }
     end
   end

@@ -10,22 +10,24 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+  
+  <div class="mb-3">
     <%= form.number_field :user_id, id: :myevent_user_id, value: current_user.id, :hidden=>true %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label "Event id provided by your host:" %>
-    <%= form.text_field :event_id %>
+    <%= form.text_field :event_id, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label "Event Access Code:" %>
-    <%= form.text_field :myevent_code %>
+    <%= form.text_field :myevent_code , class: "form-control"%>
   </div>
+
+  <br/>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary", value: btn_name %>
   </div>
 <% end %>

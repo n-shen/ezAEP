@@ -1,92 +1,100 @@
-<p>
-  <strong>Presentation ID:</strong>
-  <%= @prest.id %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @prest.prest_name %>
-</p>
-
-<p>
-  <strong>Evaluation Due:</strong>
-  <%= @prest.prest_evdue %>
-</p>
-
-<p>
-  <strong>Details:</strong>
-  <%= @prest.prest_desc %>
-</p>
-
-<p>
-  <strong>Event Name:</strong>
-  <%= Event.all.find(@prest.event_id).evt_name %>
-</p>
-
-<p>
-  <strong>Creator:</strong>
+<div class="jumbotron">
+  <h1 class="display-4"><%= @prest.prest_name %></h1>
+  <p class="lead">
+    <strong>Presentation</strong> |
+    <strong>ID:</strong> <%= @prest.id %> | 
+    <strong>Event:</strong>  <%= Event.all.find(@prest.event_id).evt_name %> |
+    <strong>Evaluation Due:</strong> <%= @prest.prest_evdue %>  |
+    <strong>Creator:</strong>    
     <%= User.all.find(@prest.user_id).first_name %>
     <%= User.all.find(@prest.user_id).last_name %>
-</p>
+  </p>
+  <hr class="my-4">
+  <p> <%= @prest.prest_desc %> </p>
+  <br/>
+</div>
 
-<%= link_to 'Edit', edit_prest_path(@prest) %> |
-<%= link_to 'Back', prests_path %>
+<% if current_user.admin %>
+  <%= link_to '<< Current Event', Event.all.find(@prest.event_id), class: "btn btn-primary" %> 
+  <%= link_to 'Edit Presentation', edit_prest_path(@prest), class: "btn btn-dark" %>
+  <%= link_to 'Delete', @prest, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger"%>
+  <br/><br/>
+<% end %>
 
-<br/><br/>
-<h2>Presentors</h2>
+<hr>
+<h2>Speakers</h2>
 
-<table class="table">
-  <thead>
+<table class="table table-striped">
+  <thead class="table-secondary">
     <tr>
-      <th>User ID</th>
-      <th>Presentor Name</th>
-      <th>Prestation ID</th>
-      <th>Prestation Name</th>
-      <th colspan="3"></th>
+      <th>Speaker ID</th>
+      <th>Speaker Name</th>
+      <th>Contact Email</th>
+      <th>Presentation ID</th>
+      <th>Presentation Name</th>
+      <th>Event</th>
+      <% if current_user.admin %>
+        <th colspan="1"></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% Myprest.all.each do |myprest| %>
-      <tr>
-        <td><%= myprest.user_id %></td>
-        <td>
-          <%= User.all.find(myprest.user_id).first_name %>
-          <%= User.all.find(myprest.user_id).last_name %>
-        </td>
-        <td><%= myprest.prest_id %></td>
-        <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
-        <td><%= link_to 'Remove', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% correct_admin = current_user.admin && Prest.all.find(myprest.prest_id).user_id == current_user.id %>
+      <% correct_user = !current_user.admin %>
+      <% if (correct_admin || correct_user) && myprest.prest_id == @prest.id %>
+        <tr>
+          <td><%= myprest.user_id %></td>
+          <td>
+            <%= User.all.find(myprest.user_id).first_name %>
+            <%= User.all.find(myprest.user_id).last_name %>
+          </td>
+          <td><%= User.all.find(myprest.user_id).email %></td>
+          <td><%= myprest.prest_id %></td>
+          <% p = Prest.all.find(myprest.prest_id) %>
+          <td><%= p.prest_name %></td>
+          <td><%= Event.all.find(p.event_id).evt_name %></td>
+          <% if current_user.admin %>
+            <td><%= link_to 'Remove', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
+<br/>
 
-<br/><br/>
-<h2>Reviews</h2>
+<% if current_user.admin %>
+  <%= link_to 'New Speaker', new_myprest_path, class:"btn btn-info" %>
+  <br/><br/>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Prest</th>
-      <th>Pd socre</th>
-      <th>Pd review</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <hr/>
+  <h2>Reviews</h2>
 
-  <tbody>
-    <% Pgrade.all.each do |pgrade| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= pgrade.user_id %></td>
-        <td><%= pgrade.prest_id %></td>
-        <td><%= pgrade.pd_socre %></td>
-        <td><%= pgrade.pd_review %></td>
-        <td><%= link_to 'Show', pgrade %></td>
-        <td><%= link_to 'Edit', edit_pgrade_path(pgrade) %></td>
-        <td><%= link_to 'Destroy', pgrade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>User</th>
+        <th>Prest</th>
+        <th>Pd socre</th>
+        <th>Pd review</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% Pgrade.all.each do |pgrade| %>
+        <tr>
+          <td><%= pgrade.user_id %></td>
+          <td><%= pgrade.prest_id %></td>
+          <td><%= pgrade.pd_socre %></td>
+          <td><%= pgrade.pd_review %></td>
+          <td><%= link_to 'Show', pgrade %></td>
+          <td><%= link_to 'Edit', edit_pgrade_path(pgrade) %></td>
+          <td><%= link_to 'Destroy', pgrade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

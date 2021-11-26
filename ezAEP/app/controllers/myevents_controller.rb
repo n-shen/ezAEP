@@ -21,16 +21,25 @@ class MyeventsController < ApplicationController
 
   # POST /myevents or /myevents.json
   def create
-    @myevent = Myevent.new(myevent_params)
-
-    respond_to do |format|
-      if @myevent.save
-        format.html { redirect_to @myevent, notice: "Myevent was successfully created." }
-        format.json { render :show, status: :created, location: @myevent }
+    event = Event.find_by(id: myevent_params[:event_id])
+    if event.present? && myevent_params[:myevent_code] == event.evt_code
+      joined = Myevent.where(event_id: myevent_params[:event_id], user_id: current_user.id)
+      if joined.present?
+        redirect_to new_myevent_path, alert: 'You have attended the event! See My Events for details.'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @myevent.errors, status: :unprocessable_entity }
+        @myevent = Myevent.new(myevent_params)
+        respond_to do |format|
+          if @myevent.save
+            format.html { redirect_to event, notice: 'You enrolled this event successfully!' }
+            format.json { render :show, status: :created, location: @myevent }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @myevent.errors, status: :unprocessable_entity }
+          end
+        end
       end
+    else
+      redirect_to new_myevent_path, alert: 'The event does NOT exist or your AccessCode is wrong! Please contact your event host. '
     end
   end
 
@@ -50,9 +59,13 @@ class MyeventsController < ApplicationController
   # DELETE /myevents/1 or /myevents/1.json
   def destroy
     @myevent.destroy
-    respond_to do |format|
-      format.html { redirect_to myevents_url, notice: "Myevent was successfully destroyed." }
-      format.json { head :no_content }
+    if !current_user.admin
+      respond_to do |format|
+        format.html { redirect_to myevents_url, notice: "You've unenrolled this event!" }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to events_path, notice: "Events' records updated!"
     end
   end
 
