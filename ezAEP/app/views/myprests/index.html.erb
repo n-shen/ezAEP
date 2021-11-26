@@ -17,7 +17,9 @@
 
   <tbody>
     <% @myprests.each do |myprest| %>
-    <% if !current_user.admin && current_user.id == myprest.user_id || current_user.admin %>
+    <% correct_admin = current_user.admin && Prest.all.find(myprest.prest_id).user_id == current_user.id %>
+    <% correct_user = !current_user.admin && current_user.id == myprest.user_id %>
+    <% if correct_admin || correct_user %>
       <tr>
         <td><%= myprest.user_id %></td>
         <td>

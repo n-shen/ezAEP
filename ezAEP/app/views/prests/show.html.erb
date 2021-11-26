@@ -33,16 +33,20 @@
 
   <tbody>
     <% Myprest.all.each do |myprest| %>
-      <tr>
-        <td><%= myprest.user_id %></td>
-        <td>
-          <%= User.all.find(myprest.user_id).first_name %>
-          <%= User.all.find(myprest.user_id).last_name %>
-        </td>
-        <td><%= myprest.prest_id %></td>
-        <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
-        <td><%= link_to 'Remove', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% correct_admin = current_user.admin && Prest.all.find(myprest.prest_id).user_id == current_user.id %>
+      <% correct_user = !current_user.admin %>
+      <% if (correct_admin || correct_user) && myprest.prest_id == @prest.id %>
+        <tr>
+          <td><%= myprest.user_id %></td>
+          <td>
+            <%= User.all.find(myprest.user_id).first_name %>
+            <%= User.all.find(myprest.user_id).last_name %>
+          </td>
+          <td><%= myprest.prest_id %></td>
+          <td><%= Prest.all.find(myprest.prest_id).prest_name %></td>
+          <td><%= link_to 'Remove', myprest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
