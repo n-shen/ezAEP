@@ -1,5 +1,8 @@
-<h1>New Pgrade</h1>
+<h1>Add a New Review</h1>
 
-<%= render 'form', pgrade: @pgrade %>
+<%= render 'form', pgrade: @pgrade, btn_name: 'Submit' %>
+<br/>
+<%= link_to 'Back', pgrades_path, class:"btn btn-dark" %>
 
-<%= link_to 'Back', pgrades_path %>
+<br/><br/>
+<p>Reminder: You cannot evaluate your own presentation.</p>

@@ -11,27 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="mb-3">
+    <%= form.number_field :user_id, id: :pgrade_user_id, value: current_user.id, :hidden=>true %>
+  </div> 
+
+  <% myp = [] %>
+  <% Myprest.where(user_id: current_user.id).each do |p| %>
+    <% myp << p.prest_id  %>
+  <% end %>
+  <% pres = [] %>
+  <% Myevent.where(user_id: current_user.id).each do |e| %>
+    <% pres.concat(Prest.where(event_id: e.event_id).ids)  %>
+  <% end %> 
+  <% pres -= myp %>
+
+  <div class="mb-3">
+    <%= form.label "Select Presentation:" %>
+    <%= form.select(:prest_id, options_for_select(Prest.where(id: pres).collect {|p| [ p.prest_name.concat(" << ").concat(Event.find(p.event_id).evt_name), p.id ] })) %>
   </div>
 
-  <div class="field">
-    <%= form.label :prest_id %>
-    <%= form.text_field :prest_id %>
+  <div class="input-group mb-3">
+    <%= form.label "Score", class:"input-group-text" %>
+    <%= form.number_field :pd_socre, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :pd_socre %>
-    <%= form.number_field :pd_socre %>
+  <div class="input-group mb-3">
+    <%= form.label "Reviews", class:"input-group-text" %>
+    <%= form.text_area :pd_review, class:"form-control", rows: 5 %>
   </div>
 
-  <div class="field">
-    <%= form.label :pd_review %>
-    <%= form.text_area :pd_review %>
-  </div>
-
+  <br/>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-primary", value: btn_name %>
   </div>
 <% end %>
