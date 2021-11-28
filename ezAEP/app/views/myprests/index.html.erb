@@ -12,9 +12,10 @@
       <th>Contact Email</th>
       <th>Presentation ID</th>
       <th>Presentation Name</th>
+      <th>Avg Score</th>
       <th>Event</th>
       <% if current_user.admin %>
-        <th colspan="2"></th>
+        <th colspan="1"></th>
       <% end %>
     </tr>
   </thead>
@@ -34,10 +35,11 @@
         <td><%= myprest.prest_id %></td>
         <% p = Prest.all.find(myprest.prest_id) %>
         <td><%= link_to p.prest_name, Prest.all.find(myprest.prest_id) %></td>
+        <% revs = Pgrade.where(prest_id: myprest.prest_id)%>
+        <td><%= revs.average(:pd_socre) %></td>
         <% e = Event.all.find(p.event_id) %>
         <td><%= link_to e.evt_name, e %></td>
         <% if current_user.admin %>
-          <td><%= link_to 'Change', edit_myprest_path(myprest) %></td>
           <td><%= link_to 'Delete', myprest, method: :delete, data: { confirm: 'Remove the presentor from current presentation?' } %></td>
         <% end %>
       </tr>
