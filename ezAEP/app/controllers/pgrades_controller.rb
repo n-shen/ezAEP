@@ -30,7 +30,7 @@ class PgradesController < ApplicationController
 
       respond_to do |format|
         if @pgrade.save
-          format.html { redirect_to @pgrade, notice: "Pgrade was successfully created." }
+          format.html { redirect_to @pgrade, notice: "Evaluation was successfully submitted." }
           format.json { render :show, status: :created, location: @pgrade }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class PgradesController < ApplicationController
   def update
     respond_to do |format|
       if @pgrade.update(pgrade_params)
-        format.html { redirect_to @pgrade, notice: "Pgrade was successfully updated." }
+        format.html { redirect_to @pgrade, notice: "Evaluation was successfully updated." }
         format.json { render :show, status: :ok, location: @pgrade }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class PgradesController < ApplicationController
   def destroy
     @pgrade.destroy
     respond_to do |format|
-      format.html { redirect_to pgrades_url, notice: "Pgrade was successfully destroyed." }
+      format.html { redirect_to pgrades_url, notice: "Evaluation was successfully deleted." }
       format.json { head :no_content }
     end
   end
