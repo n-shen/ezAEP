@@ -21,15 +21,21 @@ class PgradesController < ApplicationController
 
   # POST /pgrades or /pgrades.json
   def create
-    @pgrade = Pgrade.new(pgrade_params)
+    joined = Pgrade.where(prest_id: pgrade_params[:prest_id], user_id: current_user.id)
+    
+    if joined.present?
+      redirect_to new_pgrade_path, alert: 'You have reveiwed this presenation! See Evaluations for details.'
+    else
+      @pgrade = Pgrade.new(pgrade_params)
 
-    respond_to do |format|
-      if @pgrade.save
-        format.html { redirect_to @pgrade, notice: "Pgrade was successfully created." }
-        format.json { render :show, status: :created, location: @pgrade }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @pgrade.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @pgrade.save
+          format.html { redirect_to @pgrade, notice: "Evaluation was successfully submitted." }
+          format.json { render :show, status: :created, location: @pgrade }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @pgrade.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -38,7 +44,7 @@ class PgradesController < ApplicationController
   def update
     respond_to do |format|
       if @pgrade.update(pgrade_params)
-        format.html { redirect_to @pgrade, notice: "Pgrade was successfully updated." }
+        format.html { redirect_to @pgrade, notice: "Evaluation was successfully updated." }
         format.json { render :show, status: :ok, location: @pgrade }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +57,7 @@ class PgradesController < ApplicationController
   def destroy
     @pgrade.destroy
     respond_to do |format|
-      format.html { redirect_to pgrades_url, notice: "Pgrade was successfully destroyed." }
+      format.html { redirect_to pgrades_url, notice: "Evaluation was successfully deleted." }
       format.json { head :no_content }
     end
   end

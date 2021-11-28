@@ -21,15 +21,21 @@ class MyprestsController < ApplicationController
 
   # POST /myprests or /myprests.json
   def create
-    @myprest = Myprest.new(myprest_params)
+    joined = Myprest.where(prest_id: myprest_params[:prest_id], user_id: myprest_params[:user_id])
+    
+    if joined.present?
+      redirect_to new_myprest_path, alert: 'You have linked this speaker with selected presenation! See Speakers for details.'
+    else
+      @myprest = Myprest.new(myprest_params)
 
-    respond_to do |format|
-      if @myprest.save
-        format.html { redirect_to @myprest, notice: "Speaker and Presentation was linked successfully!" }
-        format.json { render :show, status: :created, location: @myprest }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @myprest.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @myprest.save
+          format.html { redirect_to @myprest, notice: "Speaker and Presentation was linked successfully!" }
+          format.json { render :show, status: :created, location: @myprest }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @myprest.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
