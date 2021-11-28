@@ -10,7 +10,7 @@
 
 2. Description
 
-   - `Open with Live Server`
+   - `description`
 
 ## Test
 
