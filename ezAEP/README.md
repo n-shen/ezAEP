@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# UnniiTec Project 6: ezAEP
 
-Things you may want to cover:
+## Online Document
 
-* Ruby version
+## Setup
 
-* System dependencies
+1. Description
 
-* Configuration
+2. Description
 
-* Database creation
+   - `Open with Live Server`
 
-* Database initialization
+## Test
 
-* How to run the test suite
+## Demo
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Audience/Speaker 
+    - `username: 1@a.com` 
+    - `username: 2@a.com`
+    - `username: 3@a.com`
 
-* Deployment instructions
+2. Admin/Host
+    - `username: a@a.com` 
+    - `username: b@a.com`
 
-* ...
+3. Password
+    - `111111` 
+    

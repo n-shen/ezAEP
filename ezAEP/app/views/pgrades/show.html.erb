@@ -5,7 +5,9 @@
 <p><strong>Audience ID: </strong> <%= user.id %></p>
 <p><strong>Audience Name: </strong> <%= user.first_name.concat(" ").concat(user.last_name) %></p>
 <p><strong>Presentation ID: </strong><%= @pgrade.prest_id %></p>
-<p><strong>Name: </strong><%= link_to pre.prest_name, pre %></p>
+<p><strong>Presentation Name: </strong><%= link_to pre.prest_name, pre %></p>
+<% evt = Event.all.find(pre.event_id) %>
+<p><strong>Event: </strong><%= link_to evt.evt_name, evt %></p>
 <p><strong>Score: </strong><%= @pgrade.pd_socre %></p>
 <p><strong>Review: </strong><%= @pgrade.pd_review %></p>
 <p><strong>Post date: </strong><%= @pgrade.updated_at %></p>

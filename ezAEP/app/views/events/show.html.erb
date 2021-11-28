@@ -76,8 +76,10 @@
     </thead>
 
     <tbody>
+      <% enrolled_num = 0 %>
       <% Myevent.all.each do |myevent| %>
         <% if current_user == @event.user && myevent.event_id == @event.id %>
+          <% enrolled_num += 1 %>
           <tr>
             <td><%= myevent.user_id %></td>
             <% @person = User.find(myevent.user_id) %>
@@ -90,5 +92,5 @@
     </tbody>
   </table>
 <% end %>
-
+<p>There are total <Strong><%= enrolled_num %></Strong> people attended this event.</p>
 <br/>
