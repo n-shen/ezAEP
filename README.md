@@ -29,7 +29,7 @@
     - `111111`
 
 ## Developers
-https://github.com/cse3901-2021au-1240/proj6-unniitec/graphs/contributors
+https://github.com/NicholasTec/ezAEP/graphs/contributors
 
 ## License & Copyrights
 Copyright (c) 2021 Unniitec. Team The Ohio-State University, NicholasTec. U.S.A. 
